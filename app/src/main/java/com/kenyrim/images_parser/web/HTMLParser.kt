@@ -1,4 +1,4 @@
-package com.kenyrim.images_parser
+package com.kenyrim.images_parser.web
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -7,7 +7,7 @@ import kotlinx.coroutines.async
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 
-class Parser {
+class HTMLParser {
     suspend fun run(url: String, selector: String): List<String> {
         val data: ArrayList<String> = ArrayList()
         val parse: Deferred<List<String>?> = CoroutineScope(Dispatchers.IO).async {

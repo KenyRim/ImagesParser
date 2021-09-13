@@ -1,4 +1,4 @@
-package com.kenyrim.images_parser
+package com.kenyrim.images_parser.util
 
 import android.annotation.SuppressLint
 import android.content.Context
