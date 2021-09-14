@@ -36,6 +36,7 @@ class MainAdapter(var items: ArrayList<String>,val callback: Callback) : Recycle
         private val imageView = itemView.findViewById<ImageView>(R.id.image_view)
         fun bind(imageUrl: String){
 
+            imageView.transitionName = imageUrl
             try {
                 var url = imageUrl
                 if (url.startsWith("http://")) url = url.replace("http://", "https://")
@@ -60,7 +61,7 @@ class MainAdapter(var items: ArrayList<String>,val callback: Callback) : Recycle
             }
 
             itemView.setOnClickListener {
-               callback.onItemClicked(items[adapterPosition])
+               callback.onItemClicked(items[adapterPosition],imageView)
             }
 
             setScaleAnimation(itemView)
@@ -74,7 +75,7 @@ class MainAdapter(var items: ArrayList<String>,val callback: Callback) : Recycle
     }
 
     interface Callback{
-        fun onItemClicked(item: String)
+        fun onItemClicked(item: String,view: ImageView)
     }
 
     private fun setScaleAnimation(view: View) {

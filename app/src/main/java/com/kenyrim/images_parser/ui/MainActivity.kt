@@ -1,20 +1,25 @@
-package com.kenyrim.images_parser
+package com.kenyrim.images_parser.ui
 
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.kenyrim.images_parser.R
 import com.kenyrim.images_parser.adapters.MainAdapter
+import com.kenyrim.images_parser.consts.TRANSITION_NAME
 import com.kenyrim.images_parser.consts.URL
 import com.kenyrim.images_parser.util.DateUtil
-import com.kenyrim.images_parser.util.NetworkUtil
 import com.kenyrim.images_parser.web.Observe
 import java.util.*
 import kotlin.collections.ArrayList
@@ -67,7 +72,15 @@ class MainActivity : AppCompatActivity(), MainAdapter.Callback {
 
     private fun getContent(): ArrayList<String> = Observe(list0).run()
 
-    override fun onItemClicked(item: String) {
+    override fun onItemClicked(item: String, view: ImageView) {
+        val intent = Intent(this, PhotoActivity::class.java)
+        intent.putExtra(TRANSITION_NAME, item)
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this@MainActivity,
+            view,
+            item
+        )
+        startActivity(intent, options.toBundle())
     }
 
     private fun shiftDate(dayShift: Int) {
