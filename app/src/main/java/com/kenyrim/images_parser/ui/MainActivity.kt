@@ -40,6 +40,9 @@ class MainActivity : AppCompatActivity(), MainAdapter.Callback {
 
     private lateinit var tvDate: TextView
     private lateinit var dateTime: Date
+    private lateinit var btnNext: Button
+    private lateinit var btnPrew: Button
+    private var today:String = ""
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,14 +50,24 @@ class MainActivity : AppCompatActivity(), MainAdapter.Callback {
         setContentView(R.layout.activity_main)
         recyclerView = findViewById(R.id.rv_main)
 
-        val btnNext: Button = findViewById(R.id.btn_next)
-        val btnPrew: Button = findViewById(R.id.btn_prew)
+        btnNext = findViewById(R.id.btn_next)
+        btnPrew = findViewById(R.id.btn_prew)
         tvDate = findViewById(R.id.tv_date)
 
         val cal = Calendar.getInstance()
         cal.add(Calendar.DATE, TODAY)
         dateTime = cal.time
-        shiftDate(TODAY)
+
+        today =  DateUtil().getDate(decrementDateByOne(dateTime, 0), DateUtil().patternDate)
+
+        val time = DateUtil().getDate(decrementDateByOne(dateTime, 0), DateUtil().patternTime)
+
+        var shift: Int = TODAY
+        if (time.toInt() < 12) {
+            shift = YESTERDAY
+        }
+
+        shiftDate(shift)
 
         btnNext.setOnClickListener {
             mainAdapter.clear()
@@ -84,12 +97,13 @@ class MainActivity : AppCompatActivity(), MainAdapter.Callback {
     }
 
     private fun shiftDate(dayShift: Int) {
-        val date = DateUtil().getDate(decrementDateByOne(dateTime, dayShift))
-        tvDate.text = date
+        val newDate = DateUtil().getDate(decrementDateByOne(dateTime, dayShift), DateUtil().patternDate)
+        tvDate.text = newDate
+        btnNext.isEnabled = today != newDate
 
-        list0 = arrayListOf(listOf("$URL$date/1", "$URL$date/2"))
+        list0 = arrayListOf(listOf("$URL$newDate/1", "$URL$newDate/2"))
 
-        Log.e("click", if (date.isNotEmpty()) date else "aaaaaaaaaaaaaa")
+        Log.e("click", if (newDate.isNotEmpty()) newDate else "aaaaaaaaaaaaaa")
 
         mainAdapter = MainAdapter(getContent(), this@MainActivity)
         recyclerView.run {

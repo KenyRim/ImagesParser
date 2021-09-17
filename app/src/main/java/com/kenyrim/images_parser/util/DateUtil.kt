@@ -1,6 +1,5 @@
 package com.kenyrim.images_parser.util
 
-import android.util.Log
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -8,14 +7,16 @@ import java.util.*
 class DateUtil {
 
     private var newDate: String = ""
-    private var currentTime: String = ""
+  //  private var currentDateTime: String = ""
 
-    fun getDate(date: Date): String {
+    val patternTime = "HH"
+    val patternDate = "yyyy-MM-dd"
+
+    fun getDate(date: Date, dateOrTime: String): String {
         try {
-            val fromFormat = SimpleDateFormat("EEE MMM ddd HH:mm:ss z yyyy", Locale.UK)
-            val toFormat = SimpleDateFormat("yyyy-MM-dd", Locale.UK)
+            val fromFormat = SimpleDateFormat("EEE MMM ddd HH:mm:ss z yyyy", Locale.UK)//TODO Date format by system region
+            val toFormat = SimpleDateFormat(dateOrTime, Locale.UK)
             val time: Date? = fromFormat.parse(date.toString())
-            Log.e("getDate", currentTime)
             newDate = toFormat.format(time ?: "")
 
         } catch (e: ParseException) {
