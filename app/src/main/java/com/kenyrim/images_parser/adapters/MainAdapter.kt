@@ -41,20 +41,9 @@ class MainAdapter(var items: ArrayList<String>,val callback: Callback) : Recycle
                 var url = imageUrl
                 if (url.startsWith("http://")) url = url.replace("http://", "https://")
                 Glide.with(imageView)
-                    .asBitmap()
                     .load(url)
                     .placeholder(R.drawable.image_placeholder)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(object : CustomTarget<Bitmap?>() {
-                        override fun onLoadCleared(@Nullable placeholder: Drawable?) {}
-                        override fun onResourceReady(
-                            resource: Bitmap,
-                            transition: Transition<in Bitmap?>?
-                        ) {
-                            imageView.setImageBitmap(resource)
-                            imageView.buildDrawingCache()
-                        }
-                    })
+                    .into(imageView)
 
             } catch (e: Exception) {
                 e.printStackTrace()

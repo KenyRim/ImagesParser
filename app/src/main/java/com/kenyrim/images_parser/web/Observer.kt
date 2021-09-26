@@ -16,9 +16,9 @@ class Observe<T>(t: ArrayList<T>) {
     @SuppressLint("CheckResult")
     fun run(): ArrayList<String> {
         value.toObservable().subscribeBy(
-            onNext = { it1 ->
-                it1.forEach { it2 ->
-                    val list = it2 as List<*>
+            onNext = { it ->
+                it.forEach { it1 ->
+                    val list = it1 as List<*>
                     list.forEach {
                         doWork(it.toString())
                     }
@@ -39,7 +39,6 @@ class Observe<T>(t: ArrayList<T>) {
             withContext(Dispatchers.IO) {
                 val aaa = HTMLParser().run(url, SELECTOR)
                 ResultList.addAll(aaa)
-
             }
         }
     }

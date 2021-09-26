@@ -103,8 +103,6 @@ class MainActivity : AppCompatActivity(), MainAdapter.Callback {
 
         list0 = arrayListOf(listOf("$URL$newDate/1", "$URL$newDate/2"))
 
-        Log.e("click", if (newDate.isNotEmpty()) newDate else "aaaaaaaaaaaaaa")
-
         mainAdapter = MainAdapter(getContent(), this@MainActivity)
         recyclerView.run {
             hasFixedSize()
