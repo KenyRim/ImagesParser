@@ -18,6 +18,7 @@ import java.io.FileOutputStream
 import java.nio.ByteBuffer
 
 class ImageUtils {
+
     private val PROVIDER:String = "com.kenyrim.images_parser.fileprovider"
     fun shareFile(url: String) {
         if (url.contains(".gif")) {
