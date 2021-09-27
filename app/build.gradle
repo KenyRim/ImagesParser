@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.kenyrim.images_parser"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -52,5 +52,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation 'org.jsoup:jsoup:1.11.3'
+
 
 }

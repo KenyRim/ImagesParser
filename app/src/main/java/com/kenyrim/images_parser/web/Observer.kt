@@ -1,6 +1,7 @@
-package com.kenyrim.images_parser
+package com.kenyrim.images_parser.web
 
 import android.annotation.SuppressLint
+import com.kenyrim.images_parser.consts.SELECTOR
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.rxkotlin.toObservable
 import kotlinx.coroutines.Dispatchers
@@ -9,15 +10,15 @@ import kotlinx.coroutines.withContext
 
 object ResultList : ArrayList<String>()
 
-class Observe<T>(t: List<T>) {
+class Observe<T>(t: ArrayList<T>) {
     private var value = listOf(t)
 
     @SuppressLint("CheckResult")
-    fun run(): List<String> {
+    fun run(): ArrayList<String> {
         value.toObservable().subscribeBy(
-            onNext = { it1 ->
-                it1.forEach { it2 ->
-                    val list = it2 as List<*>
+            onNext = { it ->
+                it.forEach { it1 ->
+                    val list = it1 as List<*>
                     list.forEach {
                         doWork(it.toString())
                     }
@@ -36,9 +37,8 @@ class Observe<T>(t: List<T>) {
     private fun doWork(url: String) {
         runBlocking {
             withContext(Dispatchers.IO) {
-                val aaa = Parser().run(url, SELECTOR)
+                val aaa = HTMLParser().run(url, SELECTOR)
                 ResultList.addAll(aaa)
-
             }
         }
     }
