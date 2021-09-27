@@ -7,7 +7,6 @@ import java.util.*
 class DateUtil {
 
     private var newDate: String = ""
-  //  private var currentDateTime: String = ""
 
     val patternTime = "HH"
     val patternDate = "yyyy-MM-dd"

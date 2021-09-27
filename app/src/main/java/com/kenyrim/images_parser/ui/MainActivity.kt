@@ -25,9 +25,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 import android.content.pm.PackageManager
-
-
-
+import android.widget.ImageButton
 
 
 class MainActivity : AppCompatActivity(), MainAdapter.Callback {
@@ -46,8 +44,8 @@ class MainActivity : AppCompatActivity(), MainAdapter.Callback {
 
     private lateinit var tvDate: TextView
     private lateinit var dateTime: Date
-    private lateinit var btnNext: Button
-    private lateinit var btnPrew: Button
+    private lateinit var btnNext: ImageButton
+    private lateinit var btnPrew: ImageButton
     private var today:String = ""
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -121,10 +119,10 @@ class MainActivity : AppCompatActivity(), MainAdapter.Callback {
     }
 
     private fun decrementDateByOne(date: Date, shift: Int): Date {
-        val c = Calendar.getInstance()
-        c.time = date
-        c.add(Calendar.DATE, shift)
-        dateTime = c.time
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar.add(Calendar.DATE, shift)
+        dateTime = calendar.time
         return dateTime
     }
 
