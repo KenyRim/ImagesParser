@@ -2,6 +2,7 @@ package com.kenyrim.images_parser.ui
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -22,15 +23,15 @@ class PhotoActivity : AppCompatActivity() {
 
         imageView.loadImageIfAvailable(name)
         imageView.transitionName = name
-        handler = Handler()
+        handler = Handler(Looper.getMainLooper())
         runnable = Runnable {
             imageView.loadImageIfAvailable(name)
         }
-        handler.postDelayed(runnable, 1000)
+        handler.postDelayed(runnable, 2000)
 
     }
 
-    fun ImageView.loadImageIfAvailable(url: String?) {
+    private fun ImageView.loadImageIfAvailable(url: String?) {
         url?.let {
             Glide.with(context)
                 .load(url)
