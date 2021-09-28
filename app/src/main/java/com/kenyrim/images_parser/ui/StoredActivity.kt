@@ -2,8 +2,6 @@ package com.kenyrim.images_parser.ui
 
 
 import android.Manifest
-import android.Manifest.permission.MANAGE_EXTERNAL_STORAGE
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -30,7 +28,7 @@ import android.content.pm.PackageManager
 import android.widget.ImageButton
 
 
-class MainActivity : AppCompatActivity(), MainAdapter.Callback {
+class StoredActivity : AppCompatActivity(), MainAdapter.Callback {
 
     private lateinit var recyclerView: RecyclerView
     private val REQUEST_WRITE_PERMISSION = 786
@@ -98,7 +96,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.Callback {
         val intent = Intent(this, PhotoActivity::class.java)
         intent.putExtra(TRANSITION_NAME, item)
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-            this@MainActivity,
+            this@StoredActivity,
             view,
             item
         )
@@ -112,7 +110,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.Callback {
 
         list0 = arrayListOf(listOf("$URL$newDate/1", "$URL$newDate/2"))
 
-        mainAdapter = MainAdapter(getContent(), this@MainActivity)
+        mainAdapter = MainAdapter(getContent(), this@StoredActivity)
         recyclerView.run {
             hasFixedSize()
             layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
@@ -139,7 +137,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.Callback {
     private fun requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(
-                arrayOf(Manifest.permission.ACCESS_MEDIA_LOCATION,Manifest.permission.MANAGE_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE),
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE),
                 REQUEST_WRITE_PERMISSION
             )
         } else {

@@ -13,7 +13,7 @@ class DateUtil {
 
     fun getDate(date: Date, dateOrTime: String): String {
         try {
-            val fromFormat = SimpleDateFormat("EEE MMM ddd HH:mm:ss z yyyy", Locale.UK)//TODO Date format by system region
+            val fromFormat = SimpleDateFormat("EEE MMM ddd HH:mm:ss z yyyy", Locale.US)//TODO Date format by system region
             val toFormat = SimpleDateFormat(dateOrTime, Locale.UK)
             val time: Date? = fromFormat.parse(date.toString())
             newDate = toFormat.format(time ?: "")
